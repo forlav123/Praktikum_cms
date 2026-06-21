@@ -1,0 +1,122 @@
+const products = [
+    {
+        id: 1,
+        name: "ROG Zephyrus G14 Gaming Laptop",
+        slug: "rog-zephyrus-g14-gaming-laptop",
+        category: "Laptop",
+        price: 24999000,
+        stock: 5,
+        rating: 4.8,
+        reviewsCount: 34,
+        image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
+        description: "ASUS ROG Zephyrus G14 adalah laptop gaming 14 inci paling kuat di dunia. Dibekali prosesor AMD Ryzen 9 terbaru dan NVIDIA GeForce RTX 4060, memberikan performa komputasi dan gaming luar biasa dalam bodi ultra-portable yang ringan dan stylish."
+    },
+    {
+        id: 2,
+        name: "MacBook Air M2 13-inch",
+        slug: "macbook-air-m2-13-inch",
+        category: "Laptop",
+        price: 16499000,
+        stock: 12,
+        rating: 4.9,
+        reviewsCount: 52,
+        image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80",
+        description: "Didesain ulang sepenuhnya dengan chip M2 generasi berikutnya, MacBook Air terbaru ini luar biasa tipis dan menghadirkan kecepatan serta efisiensi daya yang luar biasa dalam bodi aluminium yang tangguh. Laptop ultra-portabel yang sangat andal."
+    },
+    {
+        id: 3,
+        name: "iPhone 15 Pro Max 256GB",
+        slug: "iphone-15-pro-max-256gb",
+        category: "Smartphone",
+        price: 22999000,
+        stock: 8,
+        rating: 4.9,
+        reviewsCount: 88,
+        image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&auto=format&fit=crop&q=80",
+        description: "iPhone pertama dengan desain titanium sekelas kedirgantaraan, menggunakan chip A17 Pro revolusioner, sistem kamera internal tercanggih di iPhone, dan tombol Tindakan yang dapat disesuaikan."
+    },
+    {
+        id: 4,
+        name: "Samsung Galaxy S24 Ultra",
+        slug: "samsung-galaxy-s24-ultra",
+        category: "Smartphone",
+        price: 20999000,
+        stock: 10,
+        rating: 4.7,
+        reviewsCount: 45,
+        image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+        description: "Selamat datang di era Mobile AI. Dengan Galaxy S24 Ultra di genggaman Anda, tingkatkan kreativitas, produktivitas, dan kemungkinan baru di level yang belum pernah ada sebelumnya. Dibekali kamera 200MP dan S Pen ikonik."
+    },
+    {
+        id: 5,
+        name: "Oversized Heavyweight Hoodie",
+        slug: "oversized-heavyweight-hoodie",
+        category: "Pakaian",
+        price: 349000,
+        stock: 25,
+        rating: 4.5,
+        reviewsCount: 120,
+        image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80",
+        description: "Hoodie oversized premium dari bahan katun fleece 330gsm yang tebal namun sangat lembut dan nyaman. Memiliki potongan drop shoulder yang modern, jahitan rapi, dan saku kanguru di bagian depan."
+    },
+    {
+        id: 6,
+        name: "Slim Fit Chino Pants",
+        slug: "slim-fit-chino-pants",
+        category: "Pakaian",
+        price: 279000,
+        stock: 18,
+        rating: 4.4,
+        reviewsCount: 65,
+        image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&auto=format&fit=crop&q=80",
+        description: "Celana chino slim fit dengan bahan katun twill berkualitas premium berkombinasi dengan spandex (stretch) untuk kebebasan bergerak. Cocok digunakan untuk gaya kasual harian maupun semi-formal."
+    },
+    {
+        id: 7,
+        name: "Sony WH-1000XM5 ANC Headphones",
+        slug: "sony-wh-1000xm5-anc-headphones",
+        category: "Aksesoris",
+        price: 4999000,
+        stock: 6,
+        rating: 4.8,
+        reviewsCount: 76,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+        description: "Headphone nirkabel peredam bising terbaik dari Sony WH-1000XM5 mendefinisikan ulang mendengarkan tanpa gangguan. Dilengkapi dengan dua prosesor pengontrol delapan mikrofon untuk performa peredaman luar biasa."
+    },
+    {
+        id: 8,
+        name: "Mechanical Keyboard TKL RGB",
+        slug: "mechanical-keyboard-tkl-rgb",
+        category: "Aksesoris",
+        price: 899000,
+        stock: 15,
+        rating: 4.6,
+        reviewsCount: 40,
+        image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&auto=format&fit=crop&q=80",
+        description: "Keyboard mekanikal layout Tenkeyless (TKL) dengan sakelar Gateron Brown yang tactile dan silent. Dilengkapi lampu latar RGB yang dapat diprogram penuh, bodi aluminium kokoh, dan tombol keycaps PBT dual-shot."
+    },
+    {
+        id: 9,
+        name: "Asus Zenbook Duo OLED",
+        slug: "asus-zenbook-duo-oled",
+        category: "Laptop",
+        price: 31999000,
+        stock: 3,
+        rating: 4.9,
+        reviewsCount: 18,
+        image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&auto=format&fit=crop&q=80",
+        description: "Laptop layar ganda 14 inci revolusioner dengan dua layar sentuh OLED 3K 120Hz. Hadir dengan keyboard Bluetooth yang dapat dilepas untuk produktivitas multi-screen yang belum pernah terjadi sebelumnya."
+    },
+    {
+        id: 10,
+        name: "Minimalist Leather Cardholder",
+        slug: "minimalist-leather-cardholder",
+        category: "Aksesoris",
+        price: 149000,
+        stock: 50,
+        rating: 4.7,
+        reviewsCount: 110,
+        image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&auto=format&fit=crop&q=80",
+        description: "Dompet kartu kulit sapi asli dengan desain minimalis ultra-tipis. Memiliki 4 slot kartu eksternal dan 1 kompartemen utama di tengah untuk uang tunai lipat. Proteksi RFID terintegrasi."
+    }
+];

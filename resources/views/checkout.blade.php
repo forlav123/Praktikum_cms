@@ -1,0 +1,162 @@
+@extends('layout_final4')
+
+@section('title', 'Proses Pembayaran - GlowTech Store')
+
+@section('content')
+    <!-- Page Title -->
+    <section class="section-header" style="margin-top: 3rem; margin-bottom: 0;">
+        <div class="section-header-left">
+            <h2>Proses Checkout</h2>
+            <p>Lengkapi informasi pengiriman dan pilih metode pembayaran untuk menyelesaikan pesanan Anda</p>
+        </div>
+    </section>
+
+    <!-- Checkout Main Container -->
+    <section id="checkout-main-container" class="checkout-layout">
+        <!-- Left Column: Checkout Forms -->
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+            
+            <!-- Shipping Information Form -->
+            <form id="checkout-form" class="checkout-card" novalidate>
+                <div class="checkout-step-title">
+                    <span>1</span> Informasi Pengiriman
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="checkout-name">Nama Lengkap *</label>
+                        <input type="text" id="checkout-name" required placeholder="Contoh: Budi Santoso">
+                        <span class="form-error-msg" id="name-error">Nama lengkap wajib diisi.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-email">Alamat Email *</label>
+                        <input type="email" id="checkout-email" required placeholder="Contoh: budi@gmail.com">
+                        <span class="form-error-msg" id="email-error">Masukkan alamat email yang valid.</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="checkout-phone">Nomor Telepon / WhatsApp *</label>
+                        <input type="tel" id="checkout-phone" required placeholder="Contoh: 081234567890">
+                        <span class="form-error-msg" id="phone-error">Nomor telepon wajib diisi.</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="checkout-address">Alamat Pengiriman Lengkap *</label>
+                        <textarea id="checkout-address" rows="3" required placeholder="Nama jalan, nomor rumah, RT/RW, kecamatan, kabupaten..."></textarea>
+                        <span class="form-error-msg" id="address-error">Alamat pengiriman wajib diisi.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-city">Kota / Provinsi *</label>
+                        <input type="text" id="checkout-city" required placeholder="Contoh: Yogyakarta, DIY">
+                        <span class="form-error-msg" id="city-error">Kota wajib diisi.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-zip">Kode Pos *</label>
+                        <input type="text" id="checkout-zip" required placeholder="Contoh: 55281">
+                        <span class="form-error-msg" id="zip-error">Kode pos wajib diisi.</span>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Payment Method Card -->
+            <div class="checkout-card">
+                <div class="checkout-step-title">
+                    <span>2</span> Metode Pembayaran
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-method-card active" data-method="bank">
+                        <i class="fas fa-university"></i>
+                        <span>Transfer Bank</span>
+                        <input type="radio" name="payment-option" value="bank" checked>
+                    </div>
+                    <div class="payment-method-card" data-method="ewallet">
+                        <i class="fas fa-wallet"></i>
+                        <span>E-Wallet (OVO/Gopay)</span>
+                        <input type="radio" name="payment-option" value="ewallet">
+                    </div>
+                    <div class="payment-method-card" data-method="cod">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Bayar di Tempat (COD)</span>
+                        <input type="radio" name="payment-option" value="cod">
+                    </div>
+                </div>
+                
+                <!-- Payment Instructions -->
+                <div id="payment-details-box" style="margin-top: 1.5rem; background: var(--bg-tertiary); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary);">
+                    <p id="payment-instructions-text">Silakan transfer pembayaran Anda ke rekening Bank Mandiri kami: <strong style="color: var(--text-primary);">123-456-7890 a/n GlowTech Store</strong>. Pesanan akan segera diproses setelah bukti pembayaran berhasil kami terima.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Order Summary Review -->
+        <aside class="order-summary">
+            <h3 class="summary-title" style="margin-bottom: 1rem;">Tinjau Pesanan</h3>
+            
+            <!-- Items list inside scrollable card -->
+            <div id="checkout-items-list" class="checkout-review-items">
+                <!-- Dynamically loaded review items -->
+            </div>
+            
+            <div style="border-top: 1px solid var(--border-color); margin-top: 1.5rem; padding-top: 1.5rem;">
+                <div class="summary-row">
+                    <span>Subtotal Produk</span>
+                    <span id="checkout-summary-subtotal">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Estimasi Ongkos Kirim</span>
+                    <span id="checkout-summary-shipping" style="color: var(--success); font-weight: 600;">GRATIS</span>
+                </div>
+                <div class="summary-row">
+                    <span>Pajak PPN (11%)</span>
+                    <span id="checkout-summary-tax">Rp 0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total Pembayaran</span>
+                    <span id="checkout-summary-total">Rp 0</span>
+                </div>
+            </div>
+            
+            <button type="button" id="btn-submit-order" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                Buat Pesanan Sekarang <i class="fas fa-check-circle btn-icon" style="margin-left: 0.5rem;"></i>
+            </button>
+        </aside>
+    </section>
+
+    <!-- Empty Checkout Warning -->
+    <section id="checkout-empty-container" class="empty-cart-view" style="display: none; margin-bottom: 8rem;">
+        <div class="empty-cart-icon"><i class="fas fa-credit-card"></i></div>
+        <h2>Tidak Ada Transaksi Aktif!</h2>
+        <p>Keranjang belanja Anda kosong, sehingga Anda tidak dapat melakukan pembayaran.</p>
+        <a href="{{ route('shop') }}" class="btn btn-primary">Mulai Belanja</a>
+    </section>
+
+    <!-- Transaction Success Modal Overlay -->
+    <div id="success-modal-overlay" class="modal-overlay">
+        <div class="success-modal">
+            <div class="success-modal-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2>Transaksi Berhasil!</h2>
+            <p>Terima kasih atas pesanan Anda. Kode pesanan Anda adalah <strong id="success-order-id" style="color: var(--accent-primary);">#GTX-10398</strong>. Tim logistik kami akan segera mengemas dan mengirimkan produk Anda.</p>
+            <button type="button" id="btn-modal-close" class="btn btn-primary" style="width: 100%;">
+                Selesai & Kembali Belanja
+            </button>
+        </div>
+    </div>
+@endsection
+
+@push('scripts')
+<script>
+    // Patch modal close to redirect ke home Laravel
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCheckoutPage();
+        // Override modal close redirect
+        const btnClose = document.getElementById('btn-modal-close');
+        if (btnClose) {
+            btnClose.replaceWith(btnClose.cloneNode(true));
+            document.getElementById('btn-modal-close').addEventListener('click', () => {
+                window.location.href = '{{ route("home") }}';
+            });
+        }
+    });
+</script>
+@endpush
