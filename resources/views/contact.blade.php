@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', 'Hubungi Kami - GlowTech Store')
+@section('title', 'Hubungi Kami - Toko Maju Jaya')
 
 @section('content')
     <!-- Page Title -->
@@ -32,7 +32,7 @@
                         <div class="contact-method-icon"><i class="fas fa-envelope"></i></div>
                         <div class="contact-method-text">
                             <h4>Email Dukungan</h4>
-                            <p>forlavhadiman@gmail.com<br>sales@glowtech.com</p>
+                            <p>forlavhadiman@gmail.com<br>sales@tokomajujaya.com</p>
                         </div>
                     </div>
                     <div class="contact-method-item">

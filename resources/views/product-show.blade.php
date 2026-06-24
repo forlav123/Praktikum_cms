@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', $product->name . ' - GlowTech Store')
+@section('title', $product->name . ' - Toko Maju Jaya')
 
 @section('content')
     <!-- Navigation Breadcrumbs -->

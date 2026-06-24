@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', 'Proses Pembayaran - GlowTech Store')
+@section('title', 'Proses Pembayaran - Toko Maju Jaya')
 
 @section('content')
     <!-- Page Title -->
@@ -82,7 +82,7 @@
                 
                 <!-- Payment Instructions -->
                 <div id="payment-details-box" style="margin-top: 1.5rem; background: var(--bg-tertiary); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary);">
-                    <p id="payment-instructions-text">Silakan transfer pembayaran Anda ke rekening Bank Mandiri kami: <strong style="color: var(--text-primary);">123-456-7890 a/n GlowTech Store</strong>. Pesanan akan segera diproses setelah bukti pembayaran berhasil kami terima.</p>
+                    <p id="payment-instructions-text">Silakan transfer pembayaran Anda ke rekening Bank Mandiri kami: <strong style="color: var(--text-primary);">123-456-7890 a/n Toko Maju Jaya</strong>. Pesanan akan segera diproses setelah bukti pembayaran berhasil kami terima.</p>
                 </div>
             </div>
         </div>

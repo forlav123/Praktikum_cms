@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->updateOrInsert(
             ['email' => 'forlavhadiman@gmail.com'],
             [
-                'name'              => 'Admin GlowTech',
+                'name'              => 'Admin Toko Maju Jaya',
                 'email'             => 'forlavhadiman@gmail.com',
                 'password'          => Hash::make('password123'),
                 'email_verified_at' => now(),

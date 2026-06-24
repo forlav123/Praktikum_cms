@@ -1,13 +1,13 @@
 @extends('layout_final4')
 
-@section('title', 'Beranda - GlowTech Store')
+@section('title', 'Beranda - Toko Maju Jaya')
 
 @section('content')
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-text">
-            <h1>Gaya Hidup Modern dengan <span>Produk Premium</span></h1>
-            <p>Temukan koleksi pilihan laptop berkinerja tinggi, smartphone andalan generasi terbaru, dan tren fashion modern dengan kualitas terbaik serta garansi resmi terpercaya.</p>
+            <h1>Solusi Kebutuhan Anda dengan <span>Produk Terbaik</span></h1>
+            <p>Temukan berbagai pilihan gadget masa kini, elektronik berkualitas, dan tren fashion terbaru dengan harga bersahabat serta pelayanan terpercaya di Toko Maju Jaya.</p>
             <div class="cta-group">
                 <a href="{{ url('public_html/shop.html') }}" class="btn btn-primary">
                     Belanja Sekarang <i class="fas fa-arrow-right btn-icon"></i>
@@ -132,7 +132,7 @@
     <section class="section-header">
         <div class="section-header-left">
             <h2>Apa Kata Mereka?</h2>
-            <p>Ulasan jujur dari pelanggan setia mengenai pengalaman berbelanja di GlowTech</p>
+            <p>Ulasan jujur dari pelanggan setia mengenai pengalaman berbelanja di Toko Maju Jaya</p>
         </div>
     </section>
 
@@ -145,9 +145,9 @@
                 <p style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem;">"Pelayanan Cepat & Produk 100% Asli!"</p>
                 <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">ROG Zephyrus G14 yang saya beli sampai hanya dalam waktu 2 hari dalam kondisi tersegel rapi dan bergaransi resmi. Kinerja gaming sangat memuaskan!</p>
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">A</div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">R</div>
                     <div>
-                        <h4 style="font-size: 0.9rem;">Agus Setiawan</h4>
+                        <h4 style="font-size: 0.9rem;">Rian Deo</h4>
                         <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Buyer (Laptop)</span>
                     </div>
                 </div>
@@ -159,9 +159,9 @@
                 <p style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem;">"Bahan Hoodie Sangat Premium"</p>
                 <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Hoodie Oversized-nya tebal dan bagian dalamnya sangat lembut. Cocok dipakai saat cuaca dingin maupun nongkrong. Pasti beli lagi warna lainnya!</p>
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #a855f7; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">S</div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #a855f7; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">I</div>
                     <div>
-                        <h4 style="font-size: 0.9rem;">Siti Rahma</h4>
+                        <h4 style="font-size: 0.9rem;">Irfan Tulis</h4>
                         <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Buyer (Pakaian)</span>
                     </div>
                 </div>
@@ -173,9 +173,9 @@
                 <p style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem;">"Transaksi Mudah & Aman"</p>
                 <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Saya sangat terbantu dengan fungsionalitas webnya. Mulai dari cart hingga checkout dan konfirmasi pembayaran berjalan mulus sekali tanpa kendala.</p>
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #06b6d4; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">R</div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #06b6d4; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">F</div>
                     <div>
-                        <h4 style="font-size: 0.9rem;">Rian Hadiman</h4>
+                        <h4 style="font-size: 0.9rem;">Fend Agung</h4>
                         <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Buyer (Smartphone)</span>
                     </div>
                 </div>

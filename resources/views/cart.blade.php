@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', 'Keranjang Belanja - GlowTech Store')
+@section('title', 'Keranjang Belanja - Toko Maju Jaya')
 
 @section('content')
     <!-- Page Title -->

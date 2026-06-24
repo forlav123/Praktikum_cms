@@ -1,4 +1,4 @@
-// Main JS Controller for GlowTech Store
+// Main JS Controller for Toko Maju Jaya
 
 // Utility format Currency
 function formatRupiah(amount) {
@@ -208,7 +208,7 @@ function renderDetailPage() {
     }
 
     // Set page title
-    document.title = `${product.name} - GlowTech Store`;
+    document.title = `${product.name} - Toko Maju Jaya`;
 
     // Populate data
     document.getElementById('breadcrumb-active').textContent = product.name;
@@ -424,7 +424,7 @@ function initCheckoutForm() {
             // change instruction text
             const textEl = document.getElementById('payment-instructions-text');
             if (radio.value === 'bank') {
-                textEl.innerHTML = 'Silakan transfer pembayaran Anda ke rekening Bank Mandiri kami: <strong style="color: var(--text-primary);">123-456-7890 a/n GlowTech Store</strong>. Pesanan akan segera diproses setelah bukti pembayaran berhasil kami terima.';
+                textEl.innerHTML = 'Silakan transfer pembayaran Anda ke rekening Bank Mandiri kami: <strong style="color: var(--text-primary);">123-456-7890 a/n Toko Maju Jaya</strong>. Pesanan akan segera diproses setelah bukti pembayaran berhasil kami terima.';
             } else if (radio.value === 'ewallet') {
                 textEl.innerHTML = 'Silakan lakukan pembayaran ke nomor OVO/Gopay: <strong style="color: var(--text-primary);">0812-3456-7890</strong>. Sistem akan mendeteksi pembayaran Anda secara otomatis.';
             } else if (radio.value === 'cod') {

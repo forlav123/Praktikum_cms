@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', 'Katalog Produk Premium - GlowTech Store')
+@section('title', 'Katalog Produk Premium - Toko Maju Jaya')
 
 @section('content')
     <!-- Page Header Banner -->
