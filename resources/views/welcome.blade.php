@@ -53,33 +53,6 @@
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="section-header">
-        <div class="section-header-left">
-            <h2>Kategori Pilihan</h2>
-            <p>Jelajahi berbagai koleksi produk berkualitas tinggi berdasarkan kebutuhan Anda</p>
-        </div>
-        <a href="{{ url('public_html/shop.html') }}" style="color: var(--accent-primary); font-weight: 600; text-decoration: none;">Lihat Semua <i class="fas fa-chevron-right" style="font-size: 0.8rem;"></i></a>
-    </section>
-
-    <section class="categories-grid">
-        <a href="{{ url('public_html/shop.html?category=Laptop') }}" class="category-card">
-            <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=400&auto=format&fit=crop&q=80" alt="Laptop Kategori">
-            <div class="category-name">Laptop</div>
-        </a>
-        <a href="{{ url('public_html/shop.html?category=Smartphone') }}" class="category-card">
-            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&auto=format&fit=crop&q=80" alt="Smartphone Kategori">
-            <div class="category-name">Smartphone</div>
-        </a>
-        <a href="{{ url('public_html/shop.html?category=Pakaian') }}" class="category-card">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&auto=format&fit=crop&q=80" alt="Pakaian Kategori">
-            <div class="category-name">Pakaian</div>
-        </a>
-        <a href="{{ url('public_html/shop.html?category=Aksesoris') }}" class="category-card">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop&q=80" alt="Aksesoris Kategori">
-            <div class="category-name">Aksesoris</div>
-        </a>
-    </section>
 
     <!-- Featured Products Section -->
     <section class="section-header">
@@ -128,58 +101,4 @@
         </div>
     </section>
 
-    <!-- Testimonial Section -->
-    <section class="section-header">
-        <div class="section-header-left">
-            <h2>Apa Kata Mereka?</h2>
-            <p>Ulasan jujur dari pelanggan setia mengenai pengalaman berbelanja di Toko Maju Jaya</p>
-        </div>
-    </section>
-
-    <section class="products-section" style="margin-bottom: 8rem;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div class="feature-card" style="text-align: left; padding: 2rem;">
-                <div class="product-rating" style="margin-bottom: 0.5rem;">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <p style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem;">"Pelayanan Cepat & Produk 100% Asli!"</p>
-                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">ROG Zephyrus G14 yang saya beli sampai hanya dalam waktu 2 hari dalam kondisi tersegel rapi dan bergaransi resmi. Kinerja gaming sangat memuaskan!</p>
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">R</div>
-                    <div>
-                        <h4 style="font-size: 0.9rem;">Rian Deo</h4>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Buyer (Laptop)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="feature-card" style="text-align: left; padding: 2rem;">
-                <div class="product-rating" style="margin-bottom: 0.5rem;">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                </div>
-                <p style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem;">"Bahan Hoodie Sangat Premium"</p>
-                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Hoodie Oversized-nya tebal dan bagian dalamnya sangat lembut. Cocok dipakai saat cuaca dingin maupun nongkrong. Pasti beli lagi warna lainnya!</p>
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #a855f7; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">I</div>
-                    <div>
-                        <h4 style="font-size: 0.9rem;">Irfan Tulis</h4>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Buyer (Pakaian)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="feature-card" style="text-align: left; padding: 2rem;">
-                <div class="product-rating" style="margin-bottom: 0.5rem;">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <p style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem;">"Transaksi Mudah & Aman"</p>
-                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Saya sangat terbantu dengan fungsionalitas webnya. Mulai dari cart hingga checkout dan konfirmasi pembayaran berjalan mulus sekali tanpa kendala.</p>
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #06b6d4; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">F</div>
-                    <div>
-                        <h4 style="font-size: 0.9rem;">Fend Agung</h4>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Buyer (Smartphone)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 @endsection

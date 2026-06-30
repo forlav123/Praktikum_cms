@@ -33,7 +33,10 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" style="text-decoration: none; color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" style="text-decoration: none; color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Login</a>
+                        <a href="{{ route('login') }}" style="text-decoration: none; color: var(--text-primary); font-weight: 600; font-size: 0.9rem; margin-right: 10px;">Login</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" style="text-decoration: none; color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Daftar</a>
+                        @endif
                     @endauth
                 </div>
                 <a href="{{ route('cart') }}" class="cart-icon-btn">
