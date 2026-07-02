@@ -1,13 +1,13 @@
 @extends('layout_final4')
 
-@section('title', 'Beranda - Toko Maju Jaya')
+@section('title', 'Beranda - Toko Barang')
 
 @section('content')
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-text">
             <h1>Solusi Kebutuhan Anda dengan <span>Produk Terbaik</span></h1>
-            <p>Temukan berbagai pilihan gadget masa kini, elektronik berkualitas, dan tren fashion terbaru dengan harga bersahabat serta pelayanan terpercaya di Toko Maju Jaya.</p>
+            <p>Temukan berbagai pilihan gadget masa kini, elektronik berkualitas, dan tren fashion terbaru dengan harga bersahabat serta pelayanan terpercaya di Toko Barang.</p>
             <div class="cta-group">
                 <a href="{{ url('public_html/shop.html') }}" class="btn btn-primary">
                     Belanja Sekarang <i class="fas fa-arrow-right btn-icon"></i>
@@ -66,18 +66,14 @@
         <div class="products-grid">
             @forelse($products as $product)
                 <div class="product-card">
-                    <div class="product-image">
+                    <a href="{{ route('product.show', $product->slug) }}" class="product-img-wrapper">
                         <span class="product-badge">{{ $product->category->name }}</span>
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" loading="lazy">
                         @else
-                            <img src="https://via.placeholder.com/300?text=No+Image" alt="{{ $product->name }}">
+                            <img src="https://via.placeholder.com/300x300?text=No+Image" alt="{{ $product->name }}" loading="lazy">
                         @endif
-                        <div class="product-actions">
-                            <button class="action-btn" title="Tambahkan ke Wishlist"><i class="far fa-heart"></i></button>
-                            <a href="{{ route('product.show', $product->slug) }}" class="action-btn" title="Lihat Detail"><i class="far fa-eye"></i></a>
-                        </div>
-                    </div>
+                    </a>
                     <div class="product-info">
                         <div class="product-category">{{ $product->category->name }}</div>
                         <h3 class="product-title"><a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a></h3>

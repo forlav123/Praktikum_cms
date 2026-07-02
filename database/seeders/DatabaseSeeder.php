@@ -11,12 +11,28 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // === USERS ===
+        // Akun Admin
         DB::table('users')->updateOrInsert(
             ['email' => 'forlavhadiman@gmail.com'],
             [
                 'name'              => 'Admin Toko Maju Jaya',
                 'email'             => 'forlavhadiman@gmail.com',
+                'role'              => 'admin',
                 'password'          => Hash::make('password123'),
+                'email_verified_at' => now(),
+                'created_at'        => now(),
+                'updated_at'        => now(),
+            ]
+        );
+
+        // Akun Pelanggan (Customer)
+        DB::table('users')->updateOrInsert(
+            ['email' => 'pelanggan@gmail.com'],
+            [
+                'name'              => 'Budi Santoso',
+                'email'             => 'pelanggan@gmail.com',
+                'role'              => 'customer',
+                'password'          => Hash::make('pelanggan123'),
                 'email_verified_at' => now(),
                 'created_at'        => now(),
                 'updated_at'        => now(),

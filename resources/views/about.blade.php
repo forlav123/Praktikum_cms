@@ -1,13 +1,13 @@
 @extends('layout_final4')
 
-@section('title', 'Tentang Kami - Toko Maju Jaya')
+@section('title', 'Tentang Kami - Toko Barang')
 
 @section('content')
     <!-- About Hero Section -->
     <section class="about-hero">
         <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 1px;">Kisah & Misi Kami</span>
         <h1>Mendefinisikan Ulang <span>Belanja Online</span></h1>
-        <p>Toko Maju Jaya berdiri sejak tahun 2026 sebagai wadah e-commerce ritel premium yang berfokus menyajikan produk-produk teknologi orisinal berkualitas tinggi dan pakaian modern kelas atas. Kami percaya bahwa teknologi dan gaya hidup harus saling melengkapi untuk menunjang produktivitas Anda.</p>
+        <p>Toko Barang berdiri sejak tahun 2026 sebagai wadah e-commerce ritel premium yang berfokus menyajikan produk-produk teknologi orisinal berkualitas tinggi dan pakaian modern kelas atas. Kami percaya bahwa teknologi dan gaya hidup harus saling melengkapi untuk menunjang produktivitas Anda.</p>
     </section>
 
     <!-- Core Values / Philosophy -->

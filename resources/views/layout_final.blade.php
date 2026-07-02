@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Toko Maju Jaya - Sistem Pemesanan Barang Online')</title>
+    <title>@yield('title', 'Toko Barang - Sistem Pemesanan Barang Online')</title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Style CSS -->
@@ -17,7 +17,7 @@
         <div class="nav-container">
             <a href="{{ route('home') }}" class="logo-link">
                 <div class="logo">
-                    <i class="fas fa-shopping-bag"></i> Toko Maju Jaya
+                    <i class="fas fa-shopping-bag"></i> Toko Barang
                 </div>
             </a>
             <nav>
@@ -54,7 +54,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <div class="logo">
-                    <i class="fas fa-shopping-bag"></i> Toko Maju Jaya
+                    <i class="fas fa-shopping-bag"></i> Toko Barang
                 </div>
                 <p>Toko ritel online terpercaya yang menyediakan berbagai macam kebutuhan gadget high-end dan fashion tren terkini.</p>
             </div>
@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; {{ date('Y') }} Toko Maju Jaya - Praktikum CMS. Seluruh Hak Cipta Dilindungi.</p>
+            <p>&copy; {{ date('Y') }} Toko Barang - Praktikum CMS. Seluruh Hak Cipta Dilindungi.</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>

@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', $product->name . ' - Toko Maju Jaya')
+@section('title', $product->name . ' - Toko Barang')
 
 @section('content')
     <!-- Navigation Breadcrumbs -->
@@ -23,7 +23,7 @@
                     @if($product->image)
                         <img id="detail-product-img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                     @else
-                        <img id="detail-product-img" src="https://via.placeholder.com/600?text=No+Image" alt="{{ $product->name }}">
+                        <img id="detail-product-img" src="https://via.placeholder.com/600x600?text=No+Image" alt="{{ $product->name }}">
                     @endif
                 </div>
             </div>

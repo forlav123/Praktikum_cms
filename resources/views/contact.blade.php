@@ -1,6 +1,6 @@
 @extends('layout_final4')
 
-@section('title', 'Hubungi Kami - Toko Maju Jaya')
+@section('title', 'Hubungi Kami - Toko Barang')
 
 @section('content')
     <!-- Page Title -->

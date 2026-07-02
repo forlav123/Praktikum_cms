@@ -47,7 +47,9 @@
 }
 
 body {
-    background-color: var(--bg-primary);
+    background:
+        radial-gradient(circle at top left, rgba(99, 102, 241, 0.14), transparent 24%),
+        var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
@@ -241,6 +243,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
     text-decoration: none;
     border: none;
     outline: none;
+    letter-spacing: 0.01em;
 }
 
 .btn-primary {
@@ -330,12 +333,13 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .feature-card {
-    background: var(--bg-tertiary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 2.5rem 2rem;
     transition: var(--transition-normal);
     text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
 .feature-card:hover {
@@ -359,6 +363,63 @@ nav ul li a:hover::after, nav ul li a.active::after {
 .feature-card p {
     color: var(--text-secondary);
     font-size: 0.9rem;
+}
+
+/* Promo Banner */
+.promo-banner {
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.16));
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.promo-copy h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.promo-copy p {
+    color: var(--text-secondary);
+    max-width: 600px;
+}
+
+.promo-label {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.promo-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.promo-pill {
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 /* Category Grid Section */
@@ -435,6 +496,72 @@ nav ul li a:hover::after, nav ul li a.active::after {
     z-index: 1;
 }
 
+/* Testimonials Section */
+.testimonials-section {
+    max-width: 1200px;
+    margin: 0 auto 6rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.testimonial-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.testimonial-stars {
+    color: var(--warning);
+    margin-bottom: 1rem;
+}
+
+.testimonial-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.testimonial-author {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Closing CTA Banner */
+.cta-banner {
+    max-width: 1200px;
+    margin: 0 auto 6rem auto;
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.24), rgba(168, 85, 247, 0.16));
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.cta-banner-content h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.cta-banner-content p {
+    color: var(--text-secondary);
+    max-width: 620px;
+}
+
+.cta-banner-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 /* Product Cards Grid & Cards */
 .products-section {
     max-width: 1200px;
@@ -449,7 +576,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .product-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -458,6 +585,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
     flex-direction: column;
     height: 100%;
     position: relative;
+    box-shadow: var(--shadow-sm);
 }
 
 .product-card:hover {
@@ -589,19 +717,21 @@ nav ul li a:hover::after, nav ul li a.active::after {
 .shop-layout {
     display: grid;
     grid-template-columns: 280px 1fr;
-    gap: 2rem;
+    gap: 2.25rem;
     max-width: 1200px;
     margin: 2rem auto 6rem auto;
     padding: 0 2rem;
+    align-items: start;
 }
 
 /* Sidebar filter styling */
 .filter-sidebar {
-    background: var(--bg-secondary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 2rem;
     height: fit-content;
+    box-shadow: var(--shadow-sm);
 }
 
 .filter-group {
@@ -732,7 +862,9 @@ nav ul li a:hover::after, nav ul li a.active::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     margin-bottom: 2rem;
+    padding: 1rem 0;
 }
 
 .results-count {
@@ -770,6 +902,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
     max-width: 1200px;
     margin: 4rem auto 6rem auto;
     padding: 0 2rem;
+    align-items: start;
 }
 
 .detail-gallery {
@@ -779,7 +912,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .main-image-container {
-    background: var(--bg-secondary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -787,6 +920,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--shadow-sm);
 }
 
 .main-image-container img {
@@ -906,6 +1040,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
     max-width: 1200px;
     margin: 4rem auto 6rem auto;
     padding: 0 2rem;
+    align-items: start;
 }
 
 .cart-table-wrapper {
@@ -994,11 +1129,12 @@ nav ul li a:hover::after, nav ul li a.active::after {
 
 /* Order Summary Sidebar */
 .order-summary {
-    background: var(--bg-secondary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 2rem;
     height: fit-content;
+    box-shadow: var(--shadow-sm);
 }
 
 .summary-title {
@@ -1088,10 +1224,11 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .checkout-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
 }
 
 .checkout-step-title {
@@ -1140,7 +1277,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .form-group input, .form-group textarea, .form-group select {
-    background: var(--bg-tertiary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     padding: 0.875rem 1rem;
@@ -1213,6 +1350,23 @@ nav ul li a:hover::after, nav ul li a.active::after {
     color: var(--accent-primary);
 }
 
+#bank-transfer-list {
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    margin-top: 0.75rem;
+}
+
+#bank-transfer-list ul {
+    margin: 0.35rem 0 0 1rem;
+    padding: 0;
+}
+
+#bank-transfer-list li {
+    margin-bottom: 0.25rem;
+}
+
 /* Checkout Items Review */
 .checkout-review-items {
     display: flex;
@@ -1279,13 +1433,14 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .contact-info-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: var(--shadow-sm);
 }
 
 .contact-methods {
@@ -1326,7 +1481,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 
 .contact-map-placeholder {
     height: 200px;
-    background: var(--bg-tertiary);
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     display: flex;
@@ -1554,7 +1709,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 
 /* Footer Styles */
 footer {
-    background: var(--bg-secondary);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border-top: 1px solid var(--border-color);
     padding: 4rem 2rem 2rem 2rem;
     margin-top: auto;
@@ -1667,6 +1822,27 @@ footer {
     }
     .footer-container {
         grid-template-columns: 1fr 1fr;
+    }
+    .promo-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cta-banner-actions {
+        width: 100%;
+    }
+    .cta-banner-actions .btn {
+        flex: 1;
+    }
+    .promo-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .promo-highlights {
+        justify-content: flex-start;
     }
 }
 

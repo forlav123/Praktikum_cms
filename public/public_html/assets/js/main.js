@@ -1,4 +1,4 @@
-// Main JS Controller for Toko Maju Jaya
+// Main JS Controller for Toko Barang
 
 // Utility format Currency
 function formatRupiah(amount) {
@@ -11,6 +11,15 @@ function formatRupiah(amount) {
 }
 
 // Utility to generate Star Ratings
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function generateStars(rating) {
     let html = '';
     const fullStars = Math.floor(rating);
@@ -31,24 +40,27 @@ function generateStars(rating) {
 
 // Generate a single Product Card HTML
 function createProductCard(product) {
+    const displayName = escapeHtml(product?.name || 'Produk');
+    const displayCategory = escapeHtml(product?.category || 'Umum');
+    const displayImage = escapeHtml(product?.image || '');
     return `
         <div class="product-card">
-            ${product.stock < 10 ? `<div class="product-badge" style="background: var(--warning);">Sisa ${product.stock}</div>` : ''}
-            <a href="detail.html?id=${product.id}" class="product-img-wrapper">
-                <img src="${product.image}" alt="${product.name}">
+            ${product?.stock < 10 ? `<div class="product-badge" style="background: var(--warning);">Sisa ${product?.stock}</div>` : ''}
+            <a href="detail.html?id=${product?.id}" class="product-img-wrapper">
+                <img src="${displayImage}" alt="${displayName}" loading="lazy">
             </a>
             <div class="product-info">
-                <div class="product-category">${product.category}</div>
-                <a href="detail.html?id=${product.id}" class="product-title-link">
-                    <h3 class="product-title">${product.name}</h3>
+                <div class="product-category">${displayCategory}</div>
+                <a href="detail.html?id=${product?.id}" class="product-title-link">
+                    <h3 class="product-title">${displayName}</h3>
                 </a>
                 <div class="product-rating">
-                    ${generateStars(product.rating)}
-                    <span>(${product.reviewsCount})</span>
+                    ${generateStars(product?.rating || 0)}
+                    <span>(${product?.reviewsCount || 0})</span>
                 </div>
                 <div class="product-price-row">
-                    <div class="product-price">${formatRupiah(product.price)}</div>
-                    <button type="button" class="add-cart-btn" onclick="addToCart(${product.id})" title="Tambah ke Keranjang">
+                    <div class="product-price">${formatRupiah(product?.price || 0)}</div>
+                    <button type="button" class="add-cart-btn" onclick="addToCart(${product?.id || 0})" title="Tambah ke Keranjang">
                         <i class="fas fa-cart-plus"></i>
                     </button>
                 </div>
@@ -74,6 +86,10 @@ let searchQuery = '';
 let minPrice = 0;
 let maxPrice = 35000000;
 let activeSort = 'default';
+let currentPage = 1;
+let hasMoreProducts = false;
+let isLoadingMore = false;
+let allVisibleProducts = [];
 
 function renderShopPage() {
     const shopGrid = document.getElementById('shop-products-grid');
@@ -93,9 +109,11 @@ function renderShopPage() {
 
     // Apply Filters
     let filtered = products.filter(p => {
-        const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchCat = activeCategoryFilters.length === 0 || activeCategoryFilters.includes(p.category);
-        const matchPrice = p.price >= minPrice && p.price <= maxPrice;
+        const safeName = String(p?.name || '').toLowerCase();
+        const safeCategory = String(p?.category || '');
+        const matchSearch = safeName.includes(String(searchQuery || '').toLowerCase());
+        const matchCat = activeCategoryFilters.length === 0 || activeCategoryFilters.includes(safeCategory);
+        const matchPrice = (Number(p?.price) || 0) >= minPrice && (Number(p?.price) || 0) <= maxPrice;
         return matchSearch && matchCat && matchPrice;
     });
 
@@ -108,13 +126,40 @@ function renderShopPage() {
         filtered.sort((a, b) => b.rating - a.rating);
     } // default is keep DB order
 
+    const visibleProducts = filtered.slice(0, currentPage * 6);
+
     // Update count
     const countEl = document.getElementById('results-count-num');
+    const summaryEl = document.getElementById('results-count-summary');
     if (countEl) countEl.textContent = filtered.length;
+    if (summaryEl) {
+        summaryEl.textContent = filtered.length > 0
+            ? `Menampilkan ${Math.min(visibleProducts.length, filtered.length)} dari ${filtered.length} produk`
+            : 'Tidak ada produk yang cocok';
+    }
+    allVisibleProducts = visibleProducts;
+
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreStatus = document.getElementById('load-more-status');
+    if (loadMoreBtn) {
+        hasMoreProducts = filtered.length > visibleProducts.length;
+        loadMoreBtn.style.display = hasMoreProducts ? 'inline-block' : 'none';
+    }
+
+    if (loadMoreStatus) {
+        if (filtered.length > 0 && !hasMoreProducts) {
+            loadMoreStatus.textContent = 'Semua produk sudah tampil.';
+            loadMoreStatus.style.display = 'block';
+        } else {
+            loadMoreStatus.style.display = 'none';
+        }
+    }
 
     // Render HTML
     if (filtered.length > 0) {
-        shopGrid.innerHTML = filtered.map(p => createProductCard(p)).join('');
+        shopGrid.innerHTML = visibleProducts.map(p => createProductCard(p)).join('');
+        shopGrid.style.opacity = '1';
+        shopGrid.style.transform = 'translateY(0)';
     } else {
         shopGrid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--bg-secondary); border-radius: var(--radius-md);">
@@ -124,6 +169,49 @@ function renderShopPage() {
             </div>
         `;
     }
+}
+
+function loadMoreShopProducts() {
+    if (isLoadingMore) return;
+
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (!loadMoreBtn) return;
+
+    const loadMoreLabel = loadMoreBtn.querySelector('.load-more-label');
+    const loadMoreSpinner = loadMoreBtn.querySelector('.load-more-spinner');
+
+    isLoadingMore = true;
+    if (loadMoreLabel) loadMoreLabel.textContent = 'Memuat...';
+    if (loadMoreSpinner) loadMoreSpinner.style.display = 'inline-block';
+    loadMoreBtn.disabled = true;
+
+    fetch(`/shop/products?page=${currentPage + 1}&per_page=6`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.products && data.products.length > 0) {
+                currentPage += 1;
+                products = [...products, ...data.products];
+                renderShopPage();
+            }
+
+            if (!data.hasMore) {
+                loadMoreBtn.style.display = 'none';
+                const loadMoreStatus = document.getElementById('load-more-status');
+                if (loadMoreStatus) {
+                    loadMoreStatus.textContent = 'Semua produk sudah tampil.';
+                    loadMoreStatus.style.display = 'block';
+                }
+            }
+        })
+        .catch(() => {
+            if (loadMoreLabel) loadMoreLabel.textContent = 'Coba Lagi';
+        })
+        .finally(() => {
+            isLoadingMore = false;
+            if (loadMoreLabel) loadMoreLabel.textContent = 'Muat Lebih';
+            if (loadMoreSpinner) loadMoreSpinner.style.display = 'none';
+            loadMoreBtn.disabled = false;
+        });
 }
 
 function initShopFilters() {
@@ -137,6 +225,7 @@ function initShopFilters() {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             searchQuery = e.target.value;
+            currentPage = 1;
             renderShopPage();
         });
     }
@@ -146,6 +235,7 @@ function initShopFilters() {
             activeCategoryFilters = Array.from(catCheckboxes)
                 .filter(i => i.checked)
                 .map(i => i.value);
+            currentPage = 1;
             renderShopPage();
         });
     });
@@ -154,6 +244,7 @@ function initShopFilters() {
         priceSlider.addEventListener('input', (e) => {
             maxPrice = parseInt(e.target.value);
             priceDisplay.textContent = formatRupiah(maxPrice);
+            currentPage = 1;
             renderShopPage();
         });
     }
@@ -161,9 +252,22 @@ function initShopFilters() {
     if (sortSelect) {
         sortSelect.addEventListener('change', (e) => {
             activeSort = e.target.value;
+            currentPage = 1;
             renderShopPage();
         });
     }
+
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', loadMoreShopProducts);
+    }
+
+    window.addEventListener('scroll', () => {
+        const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 400;
+        if (nearBottom && hasMoreProducts && !isLoadingMore) {
+            loadMoreShopProducts();
+        }
+    });
 
     if (btnReset) {
         btnReset.addEventListener('click', () => {
@@ -181,6 +285,8 @@ function initShopFilters() {
             
             activeSort = 'default';
             if (sortSelect) sortSelect.value = 'default';
+
+            currentPage = 1;
 
             // Clear url params without reloading
             const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
@@ -208,7 +314,7 @@ function renderDetailPage() {
     }
 
     // Set page title
-    document.title = `${product.name} - Toko Maju Jaya`;
+    document.title = `${product.name} - Toko Barang`;
 
     // Populate data
     document.getElementById('breadcrumb-active').textContent = product.name;
@@ -409,29 +515,42 @@ function renderCheckoutPage() {
 }
 
 function initCheckoutForm() {
-    // Payment cards active state
     const paymentCards = document.querySelectorAll('.payment-method-card');
+    const textEl = document.getElementById('payment-instructions-text');
+    const bankListEl = document.getElementById('bank-transfer-list');
+
+    function updatePaymentUI(selectedValue) {
+        paymentCards.forEach(card => {
+            const radio = card.querySelector('input[type="radio"]');
+            const isActive = radio && radio.value === selectedValue;
+            card.classList.toggle('active', isActive);
+            if (radio) radio.checked = isActive;
+        });
+
+        if (!textEl) return;
+
+        if (selectedValue === 'bank') {
+            textEl.innerHTML = 'Silakan transfer pembayaran Anda ke salah satu rekening berikut. Setelah transfer, pesanan akan segera diproses.';
+            if (bankListEl) bankListEl.style.display = 'block';
+        } else if (selectedValue === 'ewallet') {
+            textEl.innerHTML = 'Silakan lakukan pembayaran ke nomor OVO/Gopay: <strong style="color: var(--text-primary);">0812-3456-7890</strong>. Sistem akan mendeteksi pembayaran Anda secara otomatis.';
+            if (bankListEl) bankListEl.style.display = 'none';
+        } else if (selectedValue === 'cod') {
+            textEl.innerHTML = 'Anda akan membayar langsung kepada kurir saat pesanan tiba di alamat Anda. Siapkan uang pas untuk mempermudah transaksi.';
+            if (bankListEl) bankListEl.style.display = 'none';
+        }
+    }
+
     paymentCards.forEach(card => {
         card.addEventListener('click', () => {
-            // remove active class
-            paymentCards.forEach(c => c.classList.remove('active'));
-            // add active
-            card.classList.add('active');
-            // check the radio
             const radio = card.querySelector('input[type="radio"]');
-            radio.checked = true;
-            
-            // change instruction text
-            const textEl = document.getElementById('payment-instructions-text');
-            if (radio.value === 'bank') {
-                textEl.innerHTML = 'Silakan transfer pembayaran Anda ke rekening Bank Mandiri kami: <strong style="color: var(--text-primary);">123-456-7890 a/n Toko Maju Jaya</strong>. Pesanan akan segera diproses setelah bukti pembayaran berhasil kami terima.';
-            } else if (radio.value === 'ewallet') {
-                textEl.innerHTML = 'Silakan lakukan pembayaran ke nomor OVO/Gopay: <strong style="color: var(--text-primary);">0812-3456-7890</strong>. Sistem akan mendeteksi pembayaran Anda secara otomatis.';
-            } else if (radio.value === 'cod') {
-                textEl.innerHTML = 'Anda akan membayar langsung kepada kurir saat pesanan tiba di alamat Anda. Siapkan uang pas untuk mempermudah transaksi.';
-            }
+            if (!radio) return;
+            updatePaymentUI(radio.value);
         });
     });
+
+    const initialValue = document.querySelector('input[name="payment-option"]:checked')?.value || 'bank';
+    updatePaymentUI(initialValue);
 
     // Handle Form Submit
     const btnSubmit = document.getElementById('btn-submit-order');
@@ -460,9 +579,21 @@ function initCheckoutForm() {
         if (isValid) {
             // Generate random order ID
             const orderId = '#GTX-' + Math.floor(10000 + Math.random() * 90000);
+            const selectedPayment = document.querySelector('input[name="payment-option"]:checked')?.value || 'bank';
+            const successTitle = document.getElementById('success-title');
+            const successMessage = document.getElementById('success-message');
             
-            // Show Modal
+            // Show Modal with payment-specific confirmation
             document.getElementById('success-order-id').textContent = orderId;
+            if (successTitle && successMessage) {
+                if (selectedPayment === 'cod') {
+                    successTitle.textContent = 'Pesanan Berhasil Dibuat!';
+                    successMessage.innerHTML = `Terima kasih atas pesanan Anda. Kode pesanan Anda adalah <strong id="success-order-id" style="color: var(--accent-primary);">${orderId}</strong>. Pembayaran akan dilakukan saat barang tiba di tempat Anda.`;
+                } else {
+                    successTitle.textContent = 'Transaksi Berhasil!';
+                    successMessage.innerHTML = `Terima kasih atas pesanan Anda. Kode pesanan Anda adalah <strong id="success-order-id" style="color: var(--accent-primary);">${orderId}</strong>. Tim logistik kami akan segera mengemas dan mengirimkan produk Anda.`;
+                }
+            }
             document.getElementById('success-modal-overlay').classList.add('show');
             
             // Clear cart
