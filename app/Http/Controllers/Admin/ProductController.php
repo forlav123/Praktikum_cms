@@ -25,7 +25,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
+            'new_category' => 'nullable|string|max:255',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
@@ -37,10 +38,24 @@ class ProductController extends Controller
             $imagePath = $request->file('image')->store('products', 'public');
         }
 
+        $categoryId = $request->category_id;
+        
+        if ($request->filled('new_category')) {
+            $category = Category::firstOrCreate(
+                ['slug' => str($request->new_category)->slug()],
+                ['name' => $request->new_category]
+            );
+            $categoryId = $category->id;
+        }
+
+        if (!$categoryId) {
+            return back()->withErrors(['category_id' => 'Silakan pilih kategori atau buat baru.'])->withInput();
+        }
+
         Product::create([
             'name' => $request->name,
             'slug' => str($request->name)->slug(),
-            'category_id' => $request->category_id,
+            'category_id' => $categoryId,
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock,
@@ -61,7 +76,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
+            'new_category' => 'nullable|string|max:255',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
@@ -73,10 +89,24 @@ class ProductController extends Controller
             $product->image = $imagePath;
         }
 
+        $categoryId = $request->category_id;
+        
+        if ($request->filled('new_category')) {
+            $category = Category::firstOrCreate(
+                ['slug' => str($request->new_category)->slug()],
+                ['name' => $request->new_category]
+            );
+            $categoryId = $category->id;
+        }
+
+        if (!$categoryId) {
+            return back()->withErrors(['category_id' => 'Silakan pilih kategori atau buat baru.'])->withInput();
+        }
+
         $product->update([
             'name' => $request->name,
             'slug' => str($request->name)->slug(),
-            'category_id' => $request->category_id,
+            'category_id' => $categoryId,
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock,

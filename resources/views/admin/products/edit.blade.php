@@ -18,12 +18,19 @@
 
                     <div class="mb-4">
                         <label for="category_id" class="block text-sm font-medium text-gray-700">Kategori</label>
-                        <select name="category_id" id="category_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-                            <option value="">Pilih Kategori</option>
+                        <select name="category_id" id="category_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Pilih Kategori yang Sudah Ada</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        <div class="mt-3">
+                            <label for="new_category" class="block text-sm font-medium text-gray-700">Atau Isi Kategori Baru Sendiri</label>
+                            <input type="text" name="new_category" id="new_category" value="{{ old('new_category') }}" placeholder="Ketik nama kategori baru di sini jika belum ada..." class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        @error('category_id')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
