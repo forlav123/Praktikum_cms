@@ -105,7 +105,7 @@
     }
 
     .filter-sidebar {
-        background: rgba(255,255,255,0.92);
+        background: rgba(238, 255, 0, 0.92);
         border: 1px solid rgba(15,23,42,0.08);
         border-radius: 20px;
         padding: 1.25rem;
@@ -117,7 +117,7 @@
     .filter-group {
         margin-bottom: 1rem;
         padding-bottom: 1rem;
-        border-bottom: 1px solid rgba(15,23,42,0.08);
+        border-bottom: 1px solid rgb(0, 64, 212);
     }
 
     .filter-title {
